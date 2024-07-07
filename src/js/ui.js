@@ -1,24 +1,31 @@
-import { ScreenElement, Label, Color } from "excalibur";
+import { ScreenElement, Label, Color, FontUnit } from "excalibur";
 
 export class UI extends ScreenElement {
-    scoreText;
+    constructor() {
+        super();
+        this.scoreText = null;
+    }
 
     onInitialize(engine) {
         this.scoreText = new Label({
             text: 'Laps: 0',
-            pos: { x: 50, y: 50 },
-            font: new ex.Font({
-                size: 30,
-                color: Color.White,
-            })
+            pos: { x: 10, y: 10 },
+            color: Color.White,
+            font: {
+                size: 20,
+                unit: FontUnit.Px
+            }
         });
         this.addChild(this.scoreText);
     }
 
     updateScore(laps) {
-        this.scoreText.text = `Laps: ${laps}`;
+        if (this.scoreText) {
+            this.scoreText.text = `Laps: ${laps}`;
+        }
     }
 }
+
 
 // export class UI extends ScreenElement {
 //     onInitialize(engine) {

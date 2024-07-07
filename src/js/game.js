@@ -1,4 +1,4 @@
-import { Engine, DisplayMode, ScreenElement } from "excalibur";
+import { Engine, DisplayMode } from "excalibur";
 import { Resources, ResourceLoader } from './resources.js';
 import { Level1 } from './level1.js';
 import { GroupedColliders } from './groupedcolliders.js';
@@ -7,31 +7,6 @@ import { UI } from './ui.js';
 export class Game extends Engine {
     score = 0;
     laps = 0;
-
-    resetLap() {       
-        this.laps = 0;
-        this.updateScoreboard();
-    }
-
-    addLap(){
-        console.log("Added lap")
-        this.laps++;
-        this.updateScoreboard();
-        if (this.laps >= 2) {
-            this.gameOver();
-        }
-    }
-
-    gameOver(){
-        console.log("Game over");
-        alert("You win!");
-    }
-
-    updateScoreboard() {
-        if (this.ui) {
-            this.ui.updateScore(this.laps);
-        }
-    }
 
     constructor() {
         super({ 
@@ -52,11 +27,40 @@ export class Game extends Engine {
         const groupedColliders = new GroupedColliders();
         mainScene.add(groupedColliders);
 
-        // Game UI
+        // Initialize and add UI
         this.ui = new UI();
+        console.log("UI initialized", this.ui);
         this.add(this.ui);
 
         this.goToScene('mainScene');
+    }
+
+    resetLap() {       
+        this.laps = 0;
+        this.updateScoreboard();
+    }
+
+    addLap() {
+        console.log("Added lap");
+        this.laps++;
+        this.updateScoreboard();
+        if (this.laps >= 2) {
+            this.gameOver();
+        }
+    }
+
+    gameOver() {
+        console.log("Game over");
+        alert("You win!");
+    }
+
+    updateScoreboard() {
+        console.log("Updating scoreboard");
+        if (this.ui && this.ui.scoreText) {
+            this.ui.updateScore(this.laps);
+        } else {
+            console.error("UI or scoreText is not initialized");
+        }
     }
 }
 

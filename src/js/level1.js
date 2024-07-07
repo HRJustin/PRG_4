@@ -11,12 +11,12 @@ export class Level1 extends Scene {
         this.game = game;
     }
 
-    onInitialize() {
+    onInitialize(engine) {
         this.background = new Background(Resources.Background.toSprite(), 750, 370, 3, 3);
         this.add(this.background);
 
         // Add the finish line
-        this.finishLine = new FinishLine(400, 300, 200, 10);
+        this.finishLine = new FinishLine(-150, 300, 200, 10);
         this.add(this.finishLine);
     }
     

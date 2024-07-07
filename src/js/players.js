@@ -1,6 +1,7 @@
 import { Actor, Vector, Keys, CollisionType } from "excalibur";
 import { Resources } from './resources.js';
 import { Gun } from './gun.js';
+import { FinishLine } from './finishline.js';
 
 export class Player extends Actor {
     constructor(x, y, width = 50, height = 100, isPlayer1 = true, game) {
@@ -20,11 +21,11 @@ export class Player extends Actor {
         
         this.isPlayer1 = isPlayer1; // Tracks if this is player 1 or player 2
         this.hasGun = false;
-        this.game = game; 
+        this.game = game;
     }
 
     onInitialize(engine) {
-        this.body.mass = 7;  // Set the mass of the car
+        this.body.mass = 7;  // Sets the mass of the car
         this.on('collisionstart', (event) => this.hitSomething(event));
     }
 
@@ -42,14 +43,10 @@ export class Player extends Actor {
             gun.pos = new Vector(0, -this.height / 2 - gun.height / 2);
         }
 
-        // Checks if the player has completed a lap
-        if (this.checkLapCompletion(event)) {
+        // Check if the player has completed a lap
+        if (event.other instanceof FinishLine) {
             this.game.addLap();
         }
-    }
-
-    checkLapCompletion(event) {
-        return false;
     }
 
     onPreUpdate(engine, delta) {
