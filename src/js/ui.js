@@ -25,11 +25,3 @@ export class UI extends ScreenElement {
         }
     }
 }
-
-
-// export class UI extends ScreenElement {
-//     onInitialize(engine) {
-//         this.scoreText = new Label({...})
-//         this.addChild(this.scoreText)
-//     }
-// }

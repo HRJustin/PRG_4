@@ -43,9 +43,18 @@ export class Player extends Actor {
             gun.pos = new Vector(0, -this.height / 2 - gun.height / 2);
         }
 
-        // Check if the player has completed a lap
+        // Check if the player has passed a checkpoint
         if (event.other instanceof FinishLine) {
-            this.game.addLap();
+            if (!event.other.isCheckpointPassed()) {
+                // Mark checkpoint as passed
+                event.other.setCheckpointPassed();
+                console.log('Checkpoint passed!');
+            } else {
+                // If all checkpoints are passed and it's the final finish line, add a lap
+                if (event.other.isFinalFinishLine && this.game) {
+                    this.game.addLap();
+                }
+            }
         }
     }
 

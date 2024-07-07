@@ -27,7 +27,7 @@ export class Game extends Engine {
         const groupedColliders = new GroupedColliders();
         mainScene.add(groupedColliders);
 
-        // Initialize and add UI
+        // Game UI
         this.ui = new UI();
         console.log("UI initialized", this.ui);
         this.add(this.ui);
