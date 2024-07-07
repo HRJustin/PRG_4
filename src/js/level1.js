@@ -8,7 +8,7 @@ import { FinishLine } from './finishline.js';
 export class Level1 extends Scene {
     constructor(game) {
         super();
-        this.game = game; // Store a reference to the game instance
+        this.game = game;
     }
 
     onInitialize() {
@@ -16,13 +16,13 @@ export class Level1 extends Scene {
         this.add(this.background);
 
         // Add the finish line
-        this.finishLine = new FinishLine(400, 300, 200, 10); // Adjust position and size as needed
+        this.finishLine = new FinishLine(400, 300, 200, 10);
         this.add(this.finishLine);
     }
     
     onActivate() {
         // Create Player 1 (Red Car)
-        this.player1 = new Player(300, 300, 50, 50, true, this.game); // Pass the game instance
+        this.player1 = new Player(300, 300, 50, 50, true, this.game);
         this.add(this.player1);
     
         // Create Player 2 (Blue Car)

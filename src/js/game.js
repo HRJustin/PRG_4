@@ -6,7 +6,7 @@ import { UI } from './ui.js';
 
 export class Game extends Engine {
     score = 0;
-    laps = 0; // Initialize laps
+    laps = 0;
 
     resetLap() {       
         this.laps = 0;
@@ -14,6 +14,7 @@ export class Game extends Engine {
     }
 
     addLap(){
+        console.log("Added lap")
         this.laps++;
         this.updateScoreboard();
         if (this.laps >= 2) {
@@ -23,7 +24,7 @@ export class Game extends Engine {
 
     gameOver(){
         console.log("Game over");
-        alert("You win!"); // Or any other game over logic
+        alert("You win!");
     }
 
     updateScoreboard() {
@@ -51,7 +52,7 @@ export class Game extends Engine {
         const groupedColliders = new GroupedColliders();
         mainScene.add(groupedColliders);
 
-        // Add the UI to the game
+        // Game UI
         this.ui = new UI();
         this.add(this.ui);
 

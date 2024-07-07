@@ -1,6 +1,6 @@
 import { ImageSource, Sound, Resource, Loader } from 'excalibur'
 
-// voeg hier jouw eigen resources toe
+// Voeg hier jouw eigen resources toe
 const Resources = {
     Fish: new ImageSource('images/fish.png'),
     Background: new ImageSource('images/RaceTrack_Bg.png'),

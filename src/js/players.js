@@ -20,7 +20,7 @@ export class Player extends Actor {
         
         this.isPlayer1 = isPlayer1; // Tracks if this is player 1 or player 2
         this.hasGun = false;
-        this.game = game; // Store a reference to the game instance
+        this.game = game; 
     }
 
     onInitialize(engine) {
@@ -42,16 +42,14 @@ export class Player extends Actor {
             gun.pos = new Vector(0, -this.height / 2 - gun.height / 2);
         }
 
-        // Check if the player has completed a lap
+        // Checks if the player has completed a lap
         if (this.checkLapCompletion(event)) {
-            this.game.addLap(); // Call addLap on the game instance
+            this.game.addLap();
         }
     }
 
     checkLapCompletion(event) {
-        // Add logic to determine if a lap is completed
-        // For example, checking collision with a finish line
-        return false; // Placeholder logic
+        return false;
     }
 
     onPreUpdate(engine, delta) {

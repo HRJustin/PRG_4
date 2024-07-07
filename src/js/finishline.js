@@ -11,6 +11,6 @@ export class FinishLine extends Actor {
     }
 
     onInitialize(engine) {
-        this.graphics.opacity = 0; // Make it invisible if needed
+        this.graphics.opacity = 0;
     }
 }
