@@ -62,7 +62,9 @@ export class Player extends Actor {
     }
 
     onPreUpdate(engine, delta) {
-        const impulseStrength = 2;
+        const impulseStrength = 2; // Acceleration force
+        const decelerationRate = 0.99;  // Rate at which the car slows down
+        const velocityThreshold = 10;  // Minimum velocity before stopping
 
         if (this.isPlayer1) {
             if (engine.input.keyboard.isHeld(Keys.W)) {
@@ -89,6 +91,21 @@ export class Player extends Actor {
             }
             if (engine.input.keyboard.isHeld(Keys.Right)) {
                 this.body.applyLinearImpulse(new Vector(impulseStrength * delta, 0));
+            }
+        }
+
+        // Decelerate the car when no keys are pressed
+        if (!engine.input.keyboard.isHeld(Keys.W) && 
+        !engine.input.keyboard.isHeld(Keys.S) && 
+        !engine.input.keyboard.isHeld(Keys.A) && 
+        !engine.input.keyboard.isHeld(Keys.D)) {
+
+        // Gradually reduce the velocity (apply "friction")
+        this.body.vel = this.body.vel.scale(decelerationRate);
+        
+        // Stop completely when velocity is very low
+        if (this.body.vel.size < velocityThreshold) {
+            this.body.vel = Vector.Zero.clone();  // Set velocity to zero when below the threshold
             }
         }
 
