@@ -1,5 +1,6 @@
 import { Engine, DisplayMode } from "excalibur";
 import { Resources, ResourceLoader } from './resources.js';
+import { IntroScene } from './introScene.js';
 import { Level1 } from './level1.js';
 import { GroupedColliders } from './groupedcolliders.js';
 import { UI } from './ui.js';
@@ -18,8 +19,11 @@ export class Game extends Engine {
         this.start(ResourceLoader).then(() => this.startGame());
     }
 
-    startGame() {
+    async startGame() {
         console.log("Start the game!");
+
+        const introScene = new IntroScene(this);
+        this.add('introScene', introScene);
 
         const mainScene = new Level1(this);
         this.add('mainScene', mainScene);
@@ -32,7 +36,7 @@ export class Game extends Engine {
         console.log("UI initialized", this.ui);
         this.add(this.ui);
 
-        this.goToScene('mainScene');
+        this.goToScene('introScene');
     }
 
     resetLap() {       

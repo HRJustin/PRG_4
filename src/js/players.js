@@ -13,6 +13,9 @@ export class Player extends Actor {
         
         this.body.collisionType = CollisionType.Active;
 
+        // Set anchor to the center of the car sprite for proper rotation
+        // this.anchor = new Vector(0.5, 0.5);
+
         if (isPlayer1) {
             this.graphics.use(Resources.RedCar.toSprite());
         } else {
