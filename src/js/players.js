@@ -1,4 +1,4 @@
-import { Actor, Vector, Keys, CollisionType } from "excalibur";
+import { Actor, Vector, Keys, CollisionType, Engine, vec } from "excalibur";
 import { Resources } from './resources.js';
 import { Gun } from './gun.js';
 import { FinishLine } from './finishline.js';
@@ -94,27 +94,31 @@ export class Player extends Actor {
             }
         }
 
-        // Decelerate the car when no keys are pressed
+        // Decelerates the car when no keys are pressed
         if (!engine.input.keyboard.isHeld(Keys.W) && 
         !engine.input.keyboard.isHeld(Keys.S) && 
         !engine.input.keyboard.isHeld(Keys.A) && 
         !engine.input.keyboard.isHeld(Keys.D)) {
 
-        // Gradually reduce the velocity (apply "friction")
+        // Gradually reduceS the velocity
         this.body.vel = this.body.vel.scale(decelerationRate);
         
-        // Stop completely when velocity is very low
+        // StopS completely when velocity is very low
         if (this.body.vel.size < velocityThreshold) {
             this.body.vel = Vector.Zero.clone();  // Set velocity to zero when below the threshold
             }
         }
 
-        // Limit the maximum speed
+        // Limits the maximum speed
         const maxSpeed = 350;
         if (this.body.vel.distance(Vector.Zero) > maxSpeed) {
             this.body.vel = this.body.vel.normalize().scale(maxSpeed);
         }
 
         this.graphics.flipHorizontal = (this.body.vel.x > 0);
+    }
+
+    onPostUpdate(engine, delta) {
+        this.rotation = this.vel.toAngle() + Math.PI / 4;
     }
 }
